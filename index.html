@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image editor</title>
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="style/index.css" />
     <!-- icons cdn linking -->
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -18,9 +18,29 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
+    <!-- Websuite logo -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/logo/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/logo/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/logo/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/logo/site.webmanifest" />
   </head>
   <body>
-    <div class="container">
+    <div class="container disable">
       <h2>Free Image Editor</h2>
       <div class="wrapper">
         <div class="editor-panel">
@@ -47,17 +67,17 @@
               <button id="right">
                 <i class="fa-solid fa-rotate-right"></i>
               </button>
-              <button id="vertical">
+              <button id="horizontal">
                 <i class="bx bx-reflect-vertical"></i>
               </button>
-              <button id="horizontal">
+              <button id="vertical">
                 <i class="bx bx-reflect-horizontal"></i>
               </button>
             </div>
           </div>
         </div>
         <div class="preview-img">
-          <img src="image-placeholder.svg" alt="preview-img" />
+          <img src="/image/image-placeholder.svg" alt="preview-img" />
         </div>
       </div>
       <div class="controls">
@@ -69,6 +89,6 @@
         </div>
       </div>
     </div>
-    <script src="./index.js"></script>
+    <script src="script/index.js"></script>
   </body>
 </html>
