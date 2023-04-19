@@ -5,11 +5,15 @@ const filterOptions = document.querySelectorAll(".filter button");
 const filterName = document.querySelector(".filter-info .name");
 const filterValue = document.querySelector(".filter-info .value");
 const filterSlider = document.querySelector(".slider input");
+const rotateOptions = document.querySelectorAll(".rotate button");
 
 let brightness = 100;
 let inversion = 0;
 let saturation = 100;
 let grayscale = 0;
+let rotate = 0;
+let flipHorizontal = 1;
+let flipVertical = 1;
 
 const loadImage = () => {
   let file = fileInput.files[0];
@@ -38,6 +42,7 @@ const updatefilter = () => {
 };
 
 const applyFilter = () => {
+  previewImg.style.transform = `rotate(${rotate}deg) scale(${flipHorizontal}, ${flipVertical})`;
   previewImg.style.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`;
 };
 
@@ -64,6 +69,21 @@ filterOptions.forEach((option) => {
       filterSlider.value = saturation;
       filterValue.innerText = `${saturation}%`;
     }
+  });
+});
+
+rotateOptions.forEach((option) => {
+  option.addEventListener("click", () => {
+    if (option.id === "left") {
+      rotate -= 90;
+    } else if (option.id === "right") {
+      rotate += 90;
+    } else if (option.id === "vertical") {
+      flipVertical = flipVertical === 1 ? -1 : 1;
+    } else if (option.id === "horizontal") {
+      flipHorizontal = flipHorizontal === 1 ? -1 : 1;
+    }
+    applyFilter();
   });
 });
 
