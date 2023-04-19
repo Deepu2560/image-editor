@@ -7,6 +7,7 @@ const filterValue = document.querySelector(".filter-info .value");
 const filterSlider = document.querySelector(".slider input");
 const rotateOptions = document.querySelectorAll(".rotate button");
 const resetfilterBtn = document.querySelector(".reset-filter");
+const downloadImg = document.querySelector(".save-img");
 
 let brightness = 100;
 let inversion = 0;
@@ -21,6 +22,7 @@ const loadImage = () => {
   if (!file) return;
   previewImg.src = URL.createObjectURL(file);
   previewImg.addEventListener("load", () => {
+    resetfilterBtn.click();
     document.querySelector(".container").classList.remove("disable");
   });
 };
@@ -100,7 +102,34 @@ const resetFilters = () => {
   applyFilter();
 };
 
+const saveImage = () => {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = previewImg.naturalWidth;
+  canvas.height = previewImg.naturalHeight;
+
+  ctx.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`;
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  if (rotate !== 0) {
+    ctx.rotate((rotate * Math.PI) / 100);
+  }
+  ctx.scale(flipHorizontal, flipVertical);
+  ctx.drawImage(
+    previewImg,
+    -canvas.width / 2,
+    -canvas.height / 2,
+    canvas.width,
+    canvas.height,
+  );
+
+  const link = document.createElement("a");
+  link.download = "image.jpg";
+  link.href = canvas.toDataURL();
+  link.click();
+};
+
 filterSlider.addEventListener("input", updatefilter);
 fileInput.addEventListener("change", loadImage);
 chooseFIle.addEventListener("click", () => fileInput.click());
 resetfilterBtn.addEventListener("click", resetFilters);
+downloadImg.addEventListener("click", saveImage);
