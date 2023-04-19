@@ -33,6 +33,12 @@ const updatefilter = () => {
   } else if (selectedFilter.id === "saturation") {
     saturation = filterSlider.value;
   }
+
+  applyFilter();
+};
+
+const applyFilter = () => {
+  previewImg.style.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`;
 };
 
 filterOptions.forEach((option) => {
